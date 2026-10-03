@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Beginner C and C++ programs for arithmetic, input, and conditional logic."
+    />
+    <title>C &amp; C++ Practice | Mithansh</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #202925;
+        --muted: #65716b;
+        --paper: #f4f5ef;
+        --surface: #fff;
+        --line: #d9ded6;
+        --green: #1f5148;
+        --lime: #c9ec79;
+        --coral: #e5684b;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0 24px;
+        color: var(--ink);
+        background:
+          radial-gradient(#dce2d8 0.7px, transparent 0.7px), var(--paper);
+        background-size: 18px 18px;
+        font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+        line-height: 1.6;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .site-header,
+      main,
+      footer {
+        width: min(100%, 1000px);
+        margin-inline: auto;
+      }
+
+      .site-header {
+        display: flex;
+        min-height: 76px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .back-link,
+      .site-nav a,
+      footer a {
+        color: var(--green);
+        font-size: 13px;
+        font-weight: 750;
+        text-decoration: none;
+      }
+
+      .site-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+      }
+
+      .back-link:hover,
+      .site-nav a:hover,
+      footer a:hover,
+      .program-link:hover {
+        color: var(--coral);
+      }
+
+      .back-link:focus-visible,
+      .site-nav a:focus-visible,
+      .program-link:focus-visible,
+      footer a:focus-visible,
+      input:focus-visible {
+        outline: 3px solid var(--coral);
+        outline-offset: 4px;
+      }
+
+      .eyebrow {
+        margin: 0 0 10px;
+        color: var(--green);
+        font-size: 10px;
+        font-weight: 850;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+
+      .intro {
+        max-width: 720px;
+        padding: 70px 0 52px;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: Georgia, "Times New Roman", serif;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(42px, 8vw, 68px);
+        letter-spacing: -0.045em;
+        line-height: 1.08;
+      }
+
+      h1 span {
+        color: var(--coral);
+      }
+
+      .lead {
+        max-width: 590px;
+        margin: 16px 0 22px;
+        color: var(--muted);
+        font-size: 17px;
+      }
+
+      .quick-start,
+      .language-note {
+        padding: 18px 20px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+
+      .quick-start {
+        margin-top: 24px;
+        box-shadow: 4px 4px 0 var(--lime);
+      }
+
+      .quick-start h2 {
+        margin: 0 0 8px;
+        font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+        font-size: 15px;
+      }
+
+      .quick-start p,
+      .language-note {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .quick-start p {
+        margin: 0;
+      }
+
+      code {
+        padding: 2px 5px;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        color: var(--green);
+        background: var(--paper);
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 0.95em;
+      }
+
+      .language-note {
+        margin: 0 0 26px;
+      }
+
+      .filter {
+        display: grid;
+        gap: 8px;
+        max-width: 440px;
+        margin: 0 0 30px;
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 750;
+      }
+
+      .filter input {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        color: var(--ink);
+        font: inherit;
+      }
+
+      .results-count,
+      .empty-state {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .results-count {
+        margin: -16px 0 22px;
+      }
+
+      .exercise-section {
+        padding: 30px 0 56px;
+        border-top: 1px solid var(--line);
+      }
+
+      .section-heading {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 20px;
+      }
+
+      .section-heading .eyebrow {
+        margin-bottom: 5px;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: clamp(30px, 5vw, 38px);
+        line-height: 1.2;
+      }
+
+      .exercise-count {
+        margin: 0 0 4px;
+        color: var(--muted);
+        font-size: 13px;
+        white-space: nowrap;
+      }
+
+      .exercise-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .exercise-card {
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--surface);
+        transition:
+          border-color 160ms ease,
+          transform 160ms ease,
+          box-shadow 160ms ease;
+      }
+
+      .exercise-card[hidden],
+      .exercise-section[hidden] {
+        display: none;
+      }
+
+      .exercise-card:hover {
+        transform: translateY(-2px);
+        border-color: var(--green);
+        box-shadow: 4px 4px 0 var(--lime);
+      }
+
+      .exercise-number {
+        color: var(--coral);
+        font-size: 10px;
+        font-weight: 850;
+        letter-spacing: 0.1em;
+      }
+
+      .exercise-card h3 {
+        margin: 9px 0 5px;
+        font-size: 21px;
+        line-height: 1.25;
+      }
+
+      .exercise-card p {
+        flex: 1;
+        margin: 0 0 15px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .program-link {
+        color: var(--green);
+        font-size: 13px;
+        font-weight: 800;
+        text-underline-offset: 4px;
+      }
+
+      .empty-state {
+        display: none;
+        padding: 16px;
+        border: 1px dashed var(--line);
+        border-radius: 8px;
+      }
+
+      footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 20px 0 30px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      @media (max-width: 760px) {
+        .exercise-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 560px) {
+        body {
+          padding-inline: 18px;
+        }
+
+        .site-header {
+          min-height: 68px;
+          align-items: flex-start;
+          flex-direction: column;
+          justify-content: center;
+          gap: 6px;
+        }
+
+        .site-nav {
+          gap: 14px;
+        }
+
+        .intro {
+          padding: 52px 0 40px;
+        }
+
+        .lead {
+          font-size: 15px;
+        }
+
+        .exercise-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .section-heading {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        footer {
+          flex-direction: column;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="back-link" href="index.html">← Back to portfolio</a>
+      <nav class="site-nav" aria-label="Project navigation">
+        <a href="#c-exercises">C exercises</a>
+        <a href="#cpp-exercises">C++ exercises</a>
+        <a href="../project-library.html">Udemy library</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="intro">
+        <p class="eyebrow">SMALL PROGRAMS · BIG IDEAS</p>
+        <h1>C &amp; C++ Practice<span>.</span></h1>
+        <p class="lead">
+          Explore beginner programs, practice one concept at a time, and open
+          the source code to see how each solution works.
+        </p>
+        <div class="quick-start">
+          <h2>Compile a C++ example</h2>
+          <p>
+            From the <code>.c++</code> folder in PowerShell, run
+            <code>g++ cpp/add_two_numbers.cpp -o add_two_numbers.exe</code>,
+            then start it with <code>.\add_two_numbers.exe</code>.
+          </p>
+        </div>
+      </section>
+
+      <p class="language-note">
+        The original exercises are C source files (<code>.c</code>). The C++
+        section contains separate <code>.cpp</code> examples.
+      </p>
+
+      <label class="filter" for="program-filter">
+        Find a program
+        <input
+          id="program-filter"
+          type="search"
+          placeholder="Search by name or concept"
+          autocomplete="off"
+          aria-controls="c-programs cpp-programs"
+        />
+      </label>
+      <p class="results-count" id="results-count" aria-live="polite"></p>
+
+      <section
+        class="exercise-section"
+        id="c-exercises"
+        aria-labelledby="c-title"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">C LANGUAGE</p>
+            <h2 id="c-title">C exercises</h2>
+          </div>
+          <p class="exercise-count">10 programs</p>
+        </div>
+        <div class="exercise-grid" id="c-programs">
+          <article
+            class="exercise-card"
+            data-search="add two numbers sum input"
+          >
+            <span class="exercise-number">C · 01</span>
+            <h3>Add two numbers</h3>
+            <p>Read two values and print their sum.</p>
+            <a class="program-link" href="../../.c%2B%2B/turbo/add2numbers.c"
+              >View C source ↗</a
+            >
+          </article>
+          <article
+            class="exercise-card"
+            data-search="rectangle area length width geometry"
+          >
+            <span class="exercise-number">C · 02</span>
+            <h3>Rectangle area</h3>
+            <p>Calculate area from a length and width.</p>
+            <a
+              class="program-link"
+              href="../../.c%2B%2B/turbo/areaofrectangle.c"
+              >View C source ↗</a
+            >
+          </article>
+          <article class="exercise-card" data-search="triangle area geometry">
+            <span class="exercise-number">C · 03</span>
+            <h3>Triangle area</h3>
+            <p>Practice calculating a triangle's area.</p>
+            <a class="program-link" href="../../.c%2B%2B/turbo/areaoftriangle.c"
+              >View C source ↗</a
+            >
+          </article>
+          <article class="exercise-card" data-search="square area geometry">
+            <span class="exercise-number">C · 04</span>
+            <h3>Square area</h3>
+            <p>Find the area of a square from its side.</p>
+            <a class="program-link" href="../../.c%2B%2B/turbo/areaofsquare.c"
+              >View C source ↗</a
+            >
+          </article>
+          <article
+            class="exercise-card"
+            data-search="simple interest finance arithmetic"
+          >
+            <span class="exercise-number">C · 05</span>
+            <h3>Simple interest</h3>
+            <p>Calculate simple interest from input values.</p>
+            <a class="program-link" href="../../.c%2B%2B/turbo/simpleintrest.c"
+              >View C source ↗</a
+            >
+          </article>
+          <article
+            class="exercise-card"
+            data-search="vowel checker switch conditional character"
+          >
+            <span class="exercise-number">C · 06</span>
+            <h3>Vowel checker</h3>
+            <p>Use a switch statement to check a character.</p>
+            <a
+              class="program-link"
+              href="../../.c%2B%2B/turbo/tocheckweatheralphabetisvovelwithswitch.c"
+              >View C source ↗</a
+            >
+          </article>
+          <article
+            class="exercise-card"
+            data-search="circle area radius geometry"
+          >
+            <span class="exercise-number">C · 07</span>
+            <h3>Circle area</h3>
+            <p>Calculate a circle's area using its radius.</p>
+            <a class="program-link" href="../../.c%2B%2B/turbo/areaofcircle.c"
+              >View C source ↗</a
+            >
+          </article>
+          <article
+            class="exercise-card"
+            data-search="add multiply arithmetic numbers"
+          >
+            <span class="exercise-number">C · 08</span>
+            <h3>Add and multiply</h3>
+            <p>Try two common operations with a pair of numbers.</p>
+            <a
+              class="program-link"
+              href="../../.c%2B%2B/turbo/addmultiply2numbers.c"
+              >View C source ↗</a
+            >
+          </article>
+          <article class="exercise-card" data-search="add three numbers sum">
+            <span class="exercise-number">C · 09</span>
+            <h3>Add three numbers</h3>
+            <p>Read and sum three values.</p>
+            <a class="program-link" href="../../.c%2B%2B/turbo/add3numbers.c"
+              >View C source ↗</a
+            >
+          </article>
+          <article
+            class="exercise-card"
+            data-search="add two numbers sum input second version"
+          >
+            <span class="exercise-number">C · 10</span>
+            <h3>Adding two numbers</h3>
+            <p>A second version of a basic addition program.</p>
+            <a class="program-link" href="../../.c%2B%2B/turbo/add2numbers2.c"
+              >View C source ↗</a
+            >
+          </article>
+        </div>
+      </section>
+
+      <section
+        class="exercise-section"
+        id="cpp-exercises"
+        aria-labelledby="cpp-title"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">C++ LANGUAGE</p>
+            <h2 id="cpp-title">C++ starters</h2>
+          </div>
+          <p class="exercise-count">5 programs</p>
+        </div>
+        <div class="exercise-grid" id="cpp-programs">
+          <article
+            class="exercise-card"
+            data-search="hello world first program output"
+          >
+            <span class="exercise-number">C++ · 01</span>
+            <h3>Hello, world!</h3>
+            <p>Print a first message with the C++ standard library.</p>
+            <a class="program-link" href="../../.c%2B%2B/cpp/hello_world.cpp"
+              >View C++ source ↗</a
+            >
+          </article>
+          <article
+            class="exercise-card"
+            data-search="add two numbers sum input variables"
+          >
+            <span class="exercise-number">C++ · 02</span>
+            <h3>Add two numbers</h3>
+            <p>Read integers and add them using standard input.</p>
+            <a
+              class="program-link"
+              href="../../.c%2B%2B/cpp/add_two_numbers.cpp"
+              >View C++ source ↗</a
+            >
+          </article>
+          <article
+            class="exercise-card"
+            data-search="circle area radius geometry arithmetic"
+          >
+            <span class="exercise-number">C++ · 03</span>
+            <h3>Circle area</h3>
+            <p>Calculate a circle's area from a radius.</p>
+            <a class="program-link" href="../../.c%2B%2B/cpp/circle_area.cpp"
+              >View C++ source ↗</a
+            >
+          </article>
+          <article
+            class="exercise-card"
+            data-search="even odd number conditional remainder"
+          >
+            <span class="exercise-number">C++ · 04</span>
+            <h3>Even or odd</h3>
+            <p>Use the remainder operator to classify an integer.</p>
+            <a class="program-link" href="../../.c%2B%2B/cpp/even_or_odd.cpp"
+              >View C++ source ↗</a
+            >
+          </article>
+          <article
+            class="exercise-card"
+            data-search="vowel checker switch conditional character"
+          >
+            <span class="exercise-number">C++ · 05</span>
+            <h3>Vowel checker</h3>
+            <p>Check uppercase or lowercase letters with a switch.</p>
+            <a class="program-link" href="../../.c%2B%2B/cpp/vowel_checker.cpp"
+              >View C++ source ↗</a
+            >
+          </article>
+        </div>
+      </section>
+
+      <p class="empty-state" id="empty-state">No programs match that search.</p>
+    </main>
+
+    <footer>
+      <span>Practice makes progress.</span>
+      <a href="../project-library.html">Explore the Udemy project library ↗</a>
+    </footer>
+
+    <script>
+      const filter = document.querySelector("#program-filter");
+      const cards = [...document.querySelectorAll(".exercise-card")];
+      const sections = [...document.querySelectorAll(".exercise-section")];
+      const count = document.querySelector("#results-count");
+      const emptyState = document.querySelector("#empty-state");
+
+      function filterPrograms() {
+        const query = filter.value.trim().toLowerCase();
+        let visible = 0;
+
+        for (const card of cards) {
+          const matches = card.dataset.search.includes(query);
+          card.hidden = !matches;
+          if (matches) visible += 1;
+        }
+
+        for (const section of sections) {
+          section.hidden = !section.querySelector(
+            ".exercise-card:not([hidden])",
+          );
+        }
+
+        count.textContent = `Showing ${visible} of ${cards.length} programs`;
+        emptyState.style.display = visible ? "none" : "block";
+      }
+
+      filter.addEventListener("input", filterPrograms);
+      filterPrograms();
+    </script>
+  </body>
+</html>
